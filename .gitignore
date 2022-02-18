@@ -13,10 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 
-/db/*.sqlite3
-config/database.yml
-config/google_analytics.yml
-
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
