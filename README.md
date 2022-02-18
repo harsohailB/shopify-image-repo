@@ -81,3 +81,29 @@ Creates a new user
 ```
 
 </details>
+
+## Run in Local Environment
+
+1. Install Ruby Gems
+
+```
+bundle
+```
+
+2. Install Node Packages
+
+```
+yarn install
+```
+
+3. Set Up Local Database
+
+```
+rake db:drop db:create db:migrate db:seed
+```
+
+4. Run Application
+
+```
+./bin/dev
+```
