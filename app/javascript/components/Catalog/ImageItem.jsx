@@ -12,12 +12,20 @@ const ImageItem = ({ imageData, publicPermissions, loadImages }) => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-60">
       <ImagePreview url={imageData.image_url} />
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
           <h4 className="font-bold">{imageData.name}</h4>
-          <p className="font-light">{imageData.user.username}</p>
+          <p className="text-gray-500 font-light text-xs">
+            {imageData.description}
+          </p>
+          <div>
+            <span className="text-gray-500 font-bold text-sm">Author: </span>
+            <span className="font-light text-gray-500 text-sm">
+              {imageData.user.username}
+            </span>
+          </div>
         </div>
         <div>
           {!imageData.public && (

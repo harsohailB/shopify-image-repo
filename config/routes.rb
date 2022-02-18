@@ -9,6 +9,5 @@ Rails.application.routes.draw do
   resources :users, param: :username, param: :password, param: :email
   resources :images, param: :public, param: :user_id, param: :name, param: :description, param: :image_url
 
-
   get '*path', to: 'pages#index', via: :all
 end
