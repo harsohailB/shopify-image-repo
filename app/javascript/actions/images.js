@@ -41,3 +41,13 @@ export const createImage = async (
 
   return response.data;
 };
+
+export const deleteImage = async (imageId) => {
+  const response = await axios.delete(`/images/${imageId}`);
+
+  if (response.status !== 204) {
+    throw "deleteImage failed" + response.status;
+  }
+
+  return response.data;
+};

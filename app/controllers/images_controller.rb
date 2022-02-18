@@ -20,7 +20,7 @@ class ImagesController < ApplicationController
     end
 
     def create
-        if !params[:name] || !params[:image_url] || !params[:public] || !params[:user_id]
+        if !params[:name] || !params[:image_url] || !params[:user_id]
             render json: { error: "Incorrect body" }, status: 422
             return
         end

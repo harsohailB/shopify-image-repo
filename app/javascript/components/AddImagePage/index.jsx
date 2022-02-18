@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createImage } from "../../actions/images";
 import { UserContext } from "../../contexts/UserContext";
+import ImagePreview from "../Catalog/ImagePreview";
 
 const AddImagePage = () => {
   const [user, dispatchUser] = useContext(UserContext);
@@ -15,9 +16,16 @@ const AddImagePage = () => {
   const navigate = useNavigate();
 
   const onFormChange = (event) => {
+    let value;
+    if (event.target.name == "public") {
+      value = event.target.checked;
+    } else {
+      value = event.target.value;
+    }
+
     setFormState((prevState) => ({
       ...prevState,
-      [event.target.name]: event.target.value
+      [event.target.name]: value
     }));
   };
 
@@ -30,7 +38,7 @@ const AddImagePage = () => {
       formState.name,
       formState.description,
       formState.image_url,
-      true
+      formState.public
     ).then((response) => navigate("/account"));
   };
 
@@ -83,7 +91,7 @@ const AddImagePage = () => {
               onChange={onFormChange}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 w-100">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Image URL
             </label>
@@ -103,9 +111,27 @@ const AddImagePage = () => {
             )}
           </div>
 
-          <img src={formState.image_url} className="mb-8 w-1/2 h-auto" />
+          <div className="md:flex md:items-center mb-6">
+            <label className="md:w-2/3 block text-gray-500 font-bold">
+              <input
+                className="mr-2 leading-tight"
+                type="checkbox"
+                name="public"
+                value={formState.public}
+                onChange={onFormChange}
+              />
+              <span className="text-sm">Public</span>
+            </label>
+          </div>
 
-          <div className="flex items-center justify-between">
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Preview
+            </label>
+            <ImagePreview url={formState.image_url} />
+          </div>
+
+          <div className="flex items-center justify-between mt-8">
             <input
               className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"

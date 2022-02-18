@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Image from "./Image";
+import ImageItem from "./ImageItem";
 import { getImages } from "../../actions/images";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -9,13 +9,19 @@ const Catalog = ({ title, publicPermissions }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    loadImages();
+  }, []);
+
+  const loadImages = () => {
     setLoading(true);
     const userId = user ? user.id : null;
-    getImages(publicPermissions, userId).then((fetchedImagesData) => {
-      setImages(cleanImageData(fetchedImagesData));
-      setLoading(false);
-    });
-  }, []);
+    getImages(publicPermissions, userId)
+      .then((fetchedImagesData) => {
+        setImages(cleanImageData(fetchedImagesData));
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const cleanImageData = (rawData) => {
     return rawData.data.map((imageData) => ({
@@ -29,10 +35,11 @@ const Catalog = ({ title, publicPermissions }) => {
 
   const renderImages = () => {
     return images.map((imageData) => (
-      <Image
+      <ImageItem
         key={imageData.id}
         imageData={imageData}
         publicPermissions={publicPermissions}
+        loadImages={loadImages}
       />
     ));
   };
