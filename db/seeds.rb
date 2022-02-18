@@ -11,3 +11,13 @@
         password: "password", 
     )
 end
+
+(1..5).each do |id|
+    Image.create!(
+        name: Faker::Commerce.product_name,
+        description: Faker::Lorem.sentence(word_count: 10),
+        image_url: Faker::LoremFlickr.image,
+        user_id: Faker::Number.between(from: 1, to: 20),
+        public: Faker::Boolean.boolean(true_ratio: 0.5),
+    )
+end

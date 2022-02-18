@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         if new_user.save
             render json: UserSerializer.new(new_user).serialized_json
         else
-            render json: { error: user.errors.messages }, status: 422
+            render json: { error: new_user.errors.messages }, status: 422
         end
     end
 
