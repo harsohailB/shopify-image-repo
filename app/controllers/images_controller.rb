@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
             render json: { error: "Specify 'user_id' in query parameters for private images" }, status: 422
             return
         else
-            images = Image.where(public: false, user_id: params[:user_id])
+            images = Image.where(user_id: params[:user_id])
         end
 
         render json: ImageSerializer.new(images, options).serialized_json

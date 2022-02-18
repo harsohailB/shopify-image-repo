@@ -7,7 +7,7 @@ const HomePage = () => {
       <h1 className="font-bold text-6xl w-50 mb-10">
         Store your images with us.
       </h1>
-      <Catalog title="Public Repository" />
+      <Catalog title="Public Repository" publicPermissions={true} />
     </div>
   );
 };
