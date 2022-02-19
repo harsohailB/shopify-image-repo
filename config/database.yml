@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: shopify_image_repo_production
-  username: shopify_image_repo
-  password: <%= ENV["shopify_IMAGE_REPO_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DATABASE_URL"] %>
+  # username: shopify_image_repo
+  # password: <%= ENV["shopify_IMAGE_REPO_DATABASE_PASSWORD"] %>
