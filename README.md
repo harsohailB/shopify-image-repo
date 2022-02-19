@@ -15,7 +15,7 @@
 ### Users
 
 <details>
-<summary>GET /users/auth (login)</summary>
+<summary>GET /users/auth</summary>
 
 Authenticates the existing auth token on client side
 
