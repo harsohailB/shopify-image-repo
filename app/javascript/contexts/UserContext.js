@@ -9,8 +9,8 @@ const initialState =
 const userReducer = (state, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      localStorage.setItem(user_storage_key, JSON.stringify(action.user.data));
-      return action.user.data;
+      localStorage.setItem(user_storage_key, JSON.stringify(action.user));
+      return action.user;
     case LOGOUT_USER:
       localStorage.setItem(user_storage_key, null);
       return null;
@@ -23,6 +23,15 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
   const [user, dispatchUser] = useReducer(userReducer, initialState);
+
+  useEffect(() => {
+    if (user == null) return;
+
+    const tokenExpiry = new Date(user.token_expiry);
+    if (new Date() >= tokenExpiry) {
+      dispatchUser({ type: LOGOUT_USER, user: null });
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={[user, dispatchUser]}>

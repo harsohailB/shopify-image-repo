@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
         if user.password == params[:password]
             user = update_auth(user)
-            render json: UserSerializer.new(user).to_serialized_json(:auth_token)
+            render json: UserSerializer.new(user).to_serialized_json(:id, :auth_token, :token_expiry)
         else
             render json: { error: "Incorrect password" }, status: 401
         end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         new_user = User.new(user_params)
 
         if new_user.save
-            render json: UserSerializer.new(new_user).to_serialized_json(:auth_token)
+            render json: UserSerializer.new(new_user).to_serialized_json(:id, :auth_token, :token_expiry)
         else
             render json: { error: new_user.errors.messages }, status: 422
         end

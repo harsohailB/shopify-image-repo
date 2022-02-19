@@ -29,9 +29,11 @@ Authenticates a user (user for login to get auth token for subsequent requests)
 
 ```
 {
+  "id": 21,
   "username": "test",
   "email": "test@gmail.com",
   "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
+  "token_expiry": "2022-02-20T00:44:36.996Z"
 }
 ```
 
@@ -56,9 +58,11 @@ Creates a new user
 
 ```
 {
+  "id": 21,
   "username": "test",
   "email": "test@gmail.com",
   "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
+  "token_expiry": "2022-02-20T00:44:36.996Z"
 }
 ```
 

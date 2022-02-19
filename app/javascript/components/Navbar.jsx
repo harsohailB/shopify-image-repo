@@ -23,7 +23,7 @@ const Navbar = () => {
       {user ? (
         <div className="space-x-2">
           <span className="text-gray-500 font-bold text-sm">
-            Logged in as: {user.attributes.username}
+            Logged in as: {user.username}
           </span>
           <a
             href="/account"
