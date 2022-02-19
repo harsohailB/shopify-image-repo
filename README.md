@@ -32,8 +32,8 @@ Authenticates a user (user for login to get auth token for subsequent requests)
   "id": 21,
   "username": "test",
   "email": "test@gmail.com",
-  "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
-  "token_expiry": "2022-02-20T00:44:36.996Z"
+  "auth_token": "6492446b-65ef-4c7d-a9a3-f819dfbd6f8d",
+  "token_expiry": "2022-02-20T01:51:27.894Z"
 }
 ```
 
@@ -58,11 +58,11 @@ Creates a new user
 
 ```json
 {
-  "id": 21,
-  "username": "test",
+  "id": 25,
+  "username": "test6",
   "email": "test@gmail.com",
-  "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
-  "token_expiry": "2022-02-20T00:44:36.996Z"
+  "auth_token": "1c47305d-daae-4c35-a723-a403f91a7d12",
+  "token_expiry": "2022-02-20T20:35:02.082Z"
 }
 ```
 
@@ -78,38 +78,30 @@ Queries all public images
 **Response:**
 
 ```json
-{
-  "data": [
-    {
-      "id": "5",
-      "type": "image",
-      "attributes": {
-        "name": "Aerodynamic Wooden Shoes",
-        "description": "Explicabo odit...",
-        "image_url": "https://loremflickr.com/300/300",
-        "public": true
-      },
-      "relationships": {
-        "user": {
-          "data": {
-            "id": "3",
-            "type": "user"
-          }
-        }
-      }
+[
+  {
+    "id": 6,
+    "name": "Practical Steel Car",
+    "description": "Mollitia dignissimos assumenda porro et aliquid nisi enim est voluptatem.",
+    "image_url": "https://loremflickr.com/300/300",
+    "public": true,
+    "user": {
+      "username": "mandi",
+      "email": "demetrius@rau-brown.biz"
     }
-  ],
-  "included": [
-    {
-      "id": "3",
-      "type": "user",
-      "attributes": {
-        "username": "jerry.dare",
-        "email": "zelma_upton@simonis.io"
-      }
+  },
+  {
+    "id": 7,
+    "name": "Mediocre Iron Car",
+    "description": "Mollitia minus non ipsam debitis fugit eius delectus vel sapiente.",
+    "image_url": "https://loremflickr.com/300/300",
+    "public": true,
+    "user": {
+      "username": "kenneth",
+      "email": "clark_lebsack@weissnat.com"
     }
-  ]
-}
+  }
+]
 ```
 
 </details>
@@ -126,38 +118,30 @@ Queries images for a certain user's account (private + public)
 **Response:**
 
 ```json
-{
-  "data": [
-    {
-      "id": "5",
-      "type": "image",
-      "attributes": {
-        "name": "Aerodynamic Wooden Shoes",
-        "description": "Explicabo odit...",
-        "image_url": "https://loremflickr.com/300/300",
-        "public": true
-      },
-      "relationships": {
-        "user": {
-          "data": {
-            "id": "3",
-            "type": "user"
-          }
-        }
-      }
+[
+  {
+    "id": 6,
+    "name": "BMW M5",
+    "description": "0-60 3.9s",
+    "image_url": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2022-bmw-m5-cs-109-1611684117.jpg?crop=0.708xw:0.798xh;0.0865xw,0.115xh&resize=640:*",
+    "public": true,
+    "user": {
+      "username": "test",
+      "email": "test@gmail.com"
     }
-  ],
-  "included": [
-    {
-      "id": "3",
-      "type": "user",
-      "attributes": {
-        "username": "jerry.dare",
-        "email": "zelma_upton@simonis.io"
-      }
+  },
+  {
+    "id": 7,
+    "name": "Ducati V4",
+    "description": "Hellllla fast",
+    "image_url": "https://cdn.visordown.com/field/image/1330x748_V4-MY20_ACC_TO_3-4-ANT-DX_AMB_2.jpg",
+    "public": true,
+    "user": {
+      "username": "test",
+      "email": "test@gmail.com"
     }
-  ]
-}
+  }
+]
 ```
 
 </details>
@@ -187,36 +171,15 @@ Creates a new image
 
 ```json
 {
-  "data": {
-    "id": "6",
-    "type": "image",
-    "attributes": {
-      "name": "private image",
-      "description": "test",
-      "image_url": "test",
-      "public": false
-    },
-    "relationships": {
-      "user": {
-        "data": {
-          "id": "1",
-          "type": "user"
-        }
-      }
-    }
-  },
-  "included": [
-    {
-      "id": "1",
-      "type": "user",
-      "attributes": {
-        "username": "verdie_veum",
-        "email": "blaine@hickle.biz",
-        "auth_token": "9561836e-1056-4e51-a030-a65e3b4b6592",
-        "token_expiry": "2022-02-20T00:34:38.717Z"
-      }
-    }
-  ]
+  "id": 10,
+  "name": "private image",
+  "description": "test",
+  "image_url": "https://www.image.com",
+  "public": false,
+  "user": {
+    "username": "test",
+    "email": "test@gmail.com"
+  }
 }
 ```
 

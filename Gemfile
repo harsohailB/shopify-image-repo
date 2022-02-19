@@ -10,7 +10,7 @@ gem "tailwindcss-rails"
 gem 'faker'
 
 # To create json's fast in backend
-gem 'fast_jsonapi'
+gem 'active_model_serializers'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2"

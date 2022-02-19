@@ -7,13 +7,13 @@ class ImagesController < ApplicationController
     def index
         images = Image.where(public: true)
 
-        render json: ImageSerializer.new(images, options).serialized_json
+        render json: images
     end
 
     def show
         images = Image.where(user_id: params[:user_id])
 
-        render json: ImageSerializer.new(images, options).serialized_json
+        render json: images
     end
 
     def create
@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
         new_image = Image.new(image_params)
 
         if new_image.save
-            render json: ImageSerializer.new(new_image, options).serialized_json
+            render json: new_image
         else
             render json: { error: new_image.errors.messages }, status: 422
         end
@@ -51,10 +51,6 @@ class ImagesController < ApplicationController
         else
             render json: { error: image.errors.messages }, status: 422
         end
-    end
-
-    def options
-        @options ||= { include: %i[user] }
     end
 
     def image_params
