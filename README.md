@@ -29,16 +29,9 @@ Authenticates a user (user for login to get auth token for subsequent requests)
 
 ```
 {
-	"data": {
-		"id": "21",
-		"type": "user",
-		"attributes": {
-			"username": "test",
-			"email": "test@gmail.com",
-			"auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
-			"token_expiry": "2022-02-20T00:44:36.996Z"
-		}
-	}
+  "username": "test",
+  "email": "test@gmail.com",
+  "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
 }
 ```
 
@@ -63,16 +56,9 @@ Creates a new user
 
 ```
 {
-	"data": {
-		"id": "22",
-		"type": "user",
-		"attributes": {
-			"username": "test",
-			"email": "test@gmail.com",
-			"auth_token": "b5bf76d2-1146-4b30-b44c-669cf50de472",
-			"token_expiry": "2022-02-20T01:08:14.741Z"
-		}
-	}
+  "username": "test",
+  "email": "test@gmail.com",
+  "auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
 }
 ```
 
@@ -84,6 +70,43 @@ Creates a new user
 <summary>GET /images</summary>
 
 Queries all public images
+
+**Response:**
+
+```
+{
+	"data": [
+		{
+			"id": "5",
+			"type": "image",
+			"attributes": {
+				"name": "Aerodynamic Wooden Shoes",
+				"description": "Explicabo odit...",
+				"image_url": "https://loremflickr.com/300/300",
+				"public": true
+			},
+			"relationships": {
+				"user": {
+					"data": {
+						"id": "3",
+						"type": "user"
+					}
+				}
+			}
+		}
+	],
+	"included": [
+		{
+			"id": "3",
+			"type": "user",
+			"attributes": {
+				"username": "jerry.dare",
+				"email": "zelma_upton@simonis.io",
+			}
+		}
+	]
+}
+```
 
 </details>
 
