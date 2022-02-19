@@ -12,56 +12,35 @@
 
 ## API Routes
 
-<details>
-<summary>GET /images</summary>
-
-Queries images based on permissions level
-
-**Query Parameters:**
-
-`public`: boolean
-
-`user_id`: when public is false
-
-</details>
+### Users
 
 <details>
-<summary>POST /images</summary>
+<summary>GET /users (login)</summary>
 
-Creates a new image
-
-**Body:**
-
-```
-{
-	"user_id": "1",
-	"name": "private image",
-	"image_url": "test",
-	"public": "false"
-}
-```
-
-</details>
-
-<details>
-<summary>DELETE /images/:id</summary>
-
-Deletes an image
-
-`id`: integer
-
-</details>
-
-<details>
-<summary>GET /users (for authentication)</summary>
-
-Authenticates user
+Authenticates a user (user for login to get auth token for subsequent requests)
 
 **Query Parameters:**
 
 `username`: string
 
 `password`: string
+
+**Response:**
+
+```
+{
+	"data": {
+		"id": "21",
+		"type": "user",
+		"attributes": {
+			"username": "test",
+			"email": "test@gmail.com",
+			"auth_token": "71b9057c-3577-496f-812d-eb22804f7e19",
+			"token_expiry": "2022-02-20T00:44:36.996Z"
+		}
+	}
+}
+```
 
 </details>
 
@@ -79,6 +58,108 @@ Creates a new user
 	"email": "test@gmail.com"
 }
 ```
+
+**Response:**
+
+```
+{
+	"data": {
+		"id": "22",
+		"type": "user",
+		"attributes": {
+			"username": "test",
+			"email": "test@gmail.com",
+			"auth_token": "b5bf76d2-1146-4b30-b44c-669cf50de472",
+			"token_expiry": "2022-02-20T01:08:14.741Z"
+		}
+	}
+}
+```
+
+</details>
+
+### Images
+
+<details>
+<summary>GET /images</summary>
+
+Queries all public images
+
+</details>
+
+<details>
+<summary>POST /images</summary>
+
+Creates a new image
+
+**Query Parameters:**
+
+`auth_token`: string
+
+**Body:**
+
+```
+{
+	"user_id": "1",
+	"name": "private image",
+  "description": "test description",
+	"image_url": "test",
+	"public": "false"
+}
+```
+
+**Response:**
+
+```
+{
+	"data": {
+		"id": "6",
+		"type": "image",
+		"attributes": {
+			"name": "private image",
+			"description": "test",
+			"image_url": "test",
+			"public": false
+		},
+		"relationships": {
+			"user": {
+				"data": {
+					"id": "1",
+					"type": "user"
+				}
+			}
+		}
+	},
+	"included": [
+		{
+			"id": "1",
+			"type": "user",
+			"attributes": {
+				"username": "verdie_veum",
+				"email": "blaine@hickle.biz",
+				"auth_token": "9561836e-1056-4e51-a030-a65e3b4b6592",
+				"token_expiry": "2022-02-20T00:34:38.717Z"
+			}
+		}
+	]
+}
+```
+
+</details>
+
+<details>
+<summary>DELETE /images/:image_id</summary>
+
+Deletes an image
+
+**Query Parameters:**
+
+`auth_token`: string
+`user_id`: int
+
+**Response:**
+
+No Content, 204
 
 </details>
 

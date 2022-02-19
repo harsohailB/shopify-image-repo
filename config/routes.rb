@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#index"
   
-  delete 'images/:id' => 'images#destroy'
+  get 'images' => 'images#index'
+  get 'images/:user_id' => 'images#show'
+  post 'images' => 'images#create'
+  delete 'images/:image_id' => 'images#destroy'
 
   resources :users, param: :username, param: :password, param: :email
-  resources :images, param: :public, param: :user_id, param: :name, param: :description, param: :image_url
 
   get '*path', to: 'pages#index', via: :all
 end

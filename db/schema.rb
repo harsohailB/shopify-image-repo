@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_18_162035) do
     t.string "username", null: false
     t.string "password", null: false
     t.string "email", null: false
+    t.string "auth_token"
+    t.datetime "token_expiry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

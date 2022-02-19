@@ -10,6 +10,7 @@ class UsersController < ApplicationController
         end
 
         if user.password == params[:password]
+            user = update_auth(user)
             render json: UserSerializer.new(user).serialized_json
         else
             render json: { error: "Incorrect password" }, status: 401
@@ -35,5 +36,15 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit!
+    end
+
+    private
+
+    def update_auth(user)
+        if user.token_expiry <= DateTime.now
+            user.update(auth_token: SecureRandom.uuid, token_expiry: DateTime.now + 1)
+        end
+
+        return user
     end
 end

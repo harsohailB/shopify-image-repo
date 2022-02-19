@@ -1,20 +1,17 @@
 class ImagesController < ApplicationController 
     protect_from_forgery with: :null_session
 
-    def index
-        if !params[:public] 
-            render json: { error: "Specify 'public' in query parameters" }, status: 422
-            return
-        end
+    before_action :check_auth
+    skip_before_action :check_auth, only: [:index]
 
-        if params[:public] == "true"
-            images = Image.where(public: true)
-        elsif !params[:user_id]
-            render json: { error: "Specify 'user_id' in query parameters for private images" }, status: 422
-            return
-        else
-            images = Image.where(user_id: params[:user_id])
-        end
+    def index
+        images = Image.where(public: true)
+
+        render json: ImageSerializer.new(images, options).serialized_json
+    end
+
+    def show
+        images = Image.where(user_id: params[:user_id])
 
         render json: ImageSerializer.new(images, options).serialized_json
     end
@@ -42,12 +39,12 @@ class ImagesController < ApplicationController
     end
 
     def destroy
-        if !params[:id]
-            render json: { error: "Specify image 'id' in query parameters" }, status: 422
+        if !params[:image_id]
+            render json: { error: "Specify image 'image_id' in query parameters" }, status: 422
             return
         end
 
-        image = Image.find(params[:id])
+        image = Image.find(params[:image_id])
 
         if image.destroy
             head :no_content
@@ -63,4 +60,24 @@ class ImagesController < ApplicationController
     def image_params
         params.require(:image).permit(:name, :description, :image_url, :public, :user_id)
     end
+
+    private
+
+    def check_auth
+        if !params[:auth_token]
+            render json: { error: 'Missing auth_token' }, status: 409
+            return
+        end
+
+        if !params[:user_id]
+            render json: { error: 'Missing user_id' }, status: 409
+            return
+        end
+
+        user = User.find(params[:user_id])
+        if user.auth_token != params[:auth_token]
+            render json: { error: 'Incorrect auth token' }, status: 409
+        end
+    end
+
 end
