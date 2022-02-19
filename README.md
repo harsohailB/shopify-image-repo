@@ -27,7 +27,7 @@ Authenticates a user (user for login to get auth token for subsequent requests)
 
 **Response:**
 
-```
+```json
 {
   "id": 21,
   "username": "test",
@@ -46,17 +46,17 @@ Creates a new user
 
 **Body:**
 
-```
+```json
 {
-	"username": "test",
-	"password": "test",
-	"email": "test@gmail.com"
+  "username": "test",
+  "password": "test",
+  "email": "test@gmail.com"
 }
 ```
 
 **Response:**
 
-```
+```json
 {
   "id": 21,
   "username": "test",
@@ -77,38 +77,38 @@ Queries all public images
 
 **Response:**
 
-```
+```json
 {
-	"data": [
-		{
-			"id": "5",
-			"type": "image",
-			"attributes": {
-				"name": "Aerodynamic Wooden Shoes",
-				"description": "Explicabo odit...",
-				"image_url": "https://loremflickr.com/300/300",
-				"public": true
-			},
-			"relationships": {
-				"user": {
-					"data": {
-						"id": "3",
-						"type": "user"
-					}
-				}
-			}
-		}
-	],
-	"included": [
-		{
-			"id": "3",
-			"type": "user",
-			"attributes": {
-				"username": "jerry.dare",
-				"email": "zelma_upton@simonis.io",
-			}
-		}
-	]
+  "data": [
+    {
+      "id": "5",
+      "type": "image",
+      "attributes": {
+        "name": "Aerodynamic Wooden Shoes",
+        "description": "Explicabo odit...",
+        "image_url": "https://loremflickr.com/300/300",
+        "public": true
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "3",
+            "type": "user"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "3",
+      "type": "user",
+      "attributes": {
+        "username": "jerry.dare",
+        "email": "zelma_upton@simonis.io"
+      }
+    }
+  ]
 }
 ```
 
@@ -125,38 +125,38 @@ Queries images for a certain user's account (private + public)
 
 **Response:**
 
-```
+```json
 {
-	"data": [
-		{
-			"id": "5",
-			"type": "image",
-			"attributes": {
-				"name": "Aerodynamic Wooden Shoes",
-				"description": "Explicabo odit...",
-				"image_url": "https://loremflickr.com/300/300",
-				"public": true
-			},
-			"relationships": {
-				"user": {
-					"data": {
-						"id": "3",
-						"type": "user"
-					}
-				}
-			}
-		}
-	],
-	"included": [
-		{
-			"id": "3",
-			"type": "user",
-			"attributes": {
-				"username": "jerry.dare",
-				"email": "zelma_upton@simonis.io",
-			}
-		}
-	]
+  "data": [
+    {
+      "id": "5",
+      "type": "image",
+      "attributes": {
+        "name": "Aerodynamic Wooden Shoes",
+        "description": "Explicabo odit...",
+        "image_url": "https://loremflickr.com/300/300",
+        "public": true
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "3",
+            "type": "user"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "3",
+      "type": "user",
+      "attributes": {
+        "username": "jerry.dare",
+        "email": "zelma_upton@simonis.io"
+      }
+    }
+  ]
 }
 ```
 
@@ -173,50 +173,50 @@ Creates a new image
 
 **Body:**
 
-```
+```json
 {
-	"user_id": "1",
-	"name": "private image",
+  "user_id": "1",
+  "name": "private image",
   "description": "test description",
-	"image_url": "test",
-	"public": "false"
+  "image_url": "test",
+  "public": "false"
 }
 ```
 
 **Response:**
 
-```
+```json
 {
-	"data": {
-		"id": "6",
-		"type": "image",
-		"attributes": {
-			"name": "private image",
-			"description": "test",
-			"image_url": "test",
-			"public": false
-		},
-		"relationships": {
-			"user": {
-				"data": {
-					"id": "1",
-					"type": "user"
-				}
-			}
-		}
-	},
-	"included": [
-		{
-			"id": "1",
-			"type": "user",
-			"attributes": {
-				"username": "verdie_veum",
-				"email": "blaine@hickle.biz",
-				"auth_token": "9561836e-1056-4e51-a030-a65e3b4b6592",
-				"token_expiry": "2022-02-20T00:34:38.717Z"
-			}
-		}
-	]
+  "data": {
+    "id": "6",
+    "type": "image",
+    "attributes": {
+      "name": "private image",
+      "description": "test",
+      "image_url": "test",
+      "public": false
+    },
+    "relationships": {
+      "user": {
+        "data": {
+          "id": "1",
+          "type": "user"
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "1",
+      "type": "user",
+      "attributes": {
+        "username": "verdie_veum",
+        "email": "blaine@hickle.biz",
+        "auth_token": "9561836e-1056-4e51-a030-a65e3b4b6592",
+        "token_expiry": "2022-02-20T00:34:38.717Z"
+      }
+    }
+  ]
 }
 ```
 
@@ -239,6 +239,8 @@ No Content, 204
 </details>
 
 ## Run in Local Environment
+
+Make sure you have `Ruby on Rails` and `postgresql` installed
 
 1. Install Ruby Gems
 
