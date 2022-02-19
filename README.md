@@ -15,9 +15,26 @@
 ### Users
 
 <details>
+<summary>GET /users/auth (login)</summary>
+
+Authenticates the existing auth token on client side
+
+**Query Parameters:**
+
+`username`: string
+
+`auth_token`: string
+
+**Response:**
+
+Ok - 200 or Unauthorized - 409
+
+</details>
+
+<details>
 <summary>GET /users (login)</summary>
 
-Authenticates a user (user for login to get auth token for subsequent requests)
+For user login and providing user with up to date auth token
 
 **Query Parameters:**
 

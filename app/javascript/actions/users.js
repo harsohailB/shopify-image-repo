@@ -1,6 +1,18 @@
 import axios from "axios";
 import { LOGIN_USER } from "./types";
 
+export const authenticateUser = async (username, auth_token) => {
+  const response = await axios.get("/users/auth", {
+    params: { username, auth_token }
+  });
+
+  if (response.status !== 200) {
+    throw new Error(response.error);
+  }
+
+  return response.data;
+};
+
 export const createUser = async (username, password, email) => {
   const body = { username, password, email };
 

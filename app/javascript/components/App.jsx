@@ -9,17 +9,17 @@ import Navbar from "./Navbar";
 
 const App = () => {
   return (
-    <UserProvider>
-      <Navbar />
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
+        <Navbar />
         <Routes>
           <Route exact path="/account/add" element={<AddImagePage />} />
           <Route exact path="/account" element={<AccountPage />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
-      </BrowserRouter>
-    </UserProvider>
+      </UserProvider>
+    </BrowserRouter>
   );
 };
 

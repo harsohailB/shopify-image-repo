@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'images' => 'images#create'
   delete 'images/:image_id' => 'images#destroy'
 
+  get 'users/auth' => 'users#auth'
+
   resources :users, param: :username, param: :password, param: :email
 
   get '*path', to: 'pages#index', via: :all

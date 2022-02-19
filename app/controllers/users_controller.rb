@@ -34,6 +34,21 @@ class UsersController < ApplicationController
         end
     end
 
+    def auth
+        if !params[:username] || !params[:auth_token]
+            render json: { error: "Provide username and auth_token to authenticate" }, status: 422
+            return
+        end
+
+        user = User.find_by(username: params[:username])
+
+        if user.auth_token == params[:auth_token]
+            render json: :ok
+        else
+            render json: :unauthorized, status: 401
+        end
+    end
+
     def user_params
         params.require(:user).permit!
     end
