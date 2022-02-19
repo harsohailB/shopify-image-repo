@@ -19,28 +19,18 @@ const Catalog = ({ title, publicPermissions }) => {
     if (publicPermissions) {
       getAllImages()
         .then((fetchedImagesData) => {
-          setImages(cleanImageData(fetchedImagesData));
+          setImages(fetchedImagesData);
           setLoading(false);
         })
         .catch((error) => console.log(error));
     } else {
       getPersonalImages(user.id, user.auth_token)
         .then((fetchedImagesData) => {
-          setImages(cleanImageData(fetchedImagesData));
+          setImages(fetchedImagesData);
           setLoading(false);
         })
         .catch((error) => console.log(error));
     }
-  };
-
-  const cleanImageData = (rawData) => {
-    return rawData.data.map((imageData) => ({
-      id: imageData.id,
-      ...imageData.attributes,
-      user: rawData.included.find(
-        (user) => user.id === imageData.relationships.user.data.id
-      ).attributes
-    }));
   };
 
   const renderImages = () => {
