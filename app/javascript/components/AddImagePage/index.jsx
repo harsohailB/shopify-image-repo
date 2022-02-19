@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 import ImagePreview from "../Catalog/ImagePreview";
 
 const AddImagePage = () => {
-  const [user, dispatchUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [formState, setFormState] = useState({
     name: "",
     description: "",
@@ -38,7 +38,8 @@ const AddImagePage = () => {
       formState.name,
       formState.description,
       formState.image_url,
-      formState.public
+      formState.public,
+      user.auth_token
     ).then((response) => navigate("/account"));
   };
 

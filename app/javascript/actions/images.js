@@ -1,18 +1,22 @@
 import axios from "axios";
 
-export const getImages = async (publicPermissions, user_id) => {
-  const params = {
-    public: publicPermissions
-  };
-
-  if (!publicPermissions) {
-    params.user_id = user_id;
-  }
-
-  const response = await axios.get("/images", { params });
+export const getAllImages = async () => {
+  const response = await axios.get("/images");
 
   if (response.status !== 200) {
-    throw "getImages failed " + response.status;
+    throw "getAllImages failed " + response.status;
+  }
+
+  return response.data;
+};
+
+export const getPersonalImages = async (user_id, auth_token) => {
+  const response = await axios.get(`/images/${user_id}`, {
+    params: { auth_token }
+  });
+
+  if (response.status !== 200) {
+    throw "getPersonalImages failed " + response.status;
   }
 
   return response.data;
@@ -23,7 +27,8 @@ export const createImage = async (
   name,
   description,
   image_url,
-  publicPermissions
+  publicPermissions,
+  auth_token
 ) => {
   const body = {
     user_id,
@@ -33,7 +38,13 @@ export const createImage = async (
     public: publicPermissions
   };
 
-  const response = await axios.post("/images", { ...body });
+  const response = await axios.post(
+    "/images",
+    { ...body },
+    {
+      params: { auth_token }
+    }
+  );
 
   if (response.status !== 200) {
     throw new Error(response.error);
@@ -42,8 +53,10 @@ export const createImage = async (
   return response.data;
 };
 
-export const deleteImage = async (imageId) => {
-  const response = await axios.delete(`/images/${imageId}`);
+export const deleteImage = async (imageId, user_id, auth_token) => {
+  const response = await axios.delete(`/images/${imageId}`, {
+    params: { user_id, auth_token }
+  });
 
   if (response.status !== 204) {
     throw "deleteImage failed" + response.status;

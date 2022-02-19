@@ -1,12 +1,15 @@
 import { faEyeSlash, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
 import { deleteImage } from "../../actions/images";
+import { UserContext } from "../../contexts/UserContext";
 import ImagePreview from "./ImagePreview";
 
 const ImageItem = ({ imageData, publicPermissions, loadImages }) => {
+  const [user] = useContext(UserContext);
+
   const handleDelete = () => {
-    deleteImage(imageData.id).then((response) => {
+    deleteImage(imageData.id, user.id, user.auth_token).then((response) => {
       loadImages();
     });
   };

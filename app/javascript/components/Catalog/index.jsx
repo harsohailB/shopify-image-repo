@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ImageItem from "./ImageItem";
-import { getImages } from "../../actions/images";
+import { getAllImages, getPersonalImages } from "../../actions/images";
 import { UserContext } from "../../contexts/UserContext";
 
 const Catalog = ({ title, publicPermissions }) => {
@@ -15,12 +15,22 @@ const Catalog = ({ title, publicPermissions }) => {
   const loadImages = () => {
     setLoading(true);
     const userId = user ? user.id : null;
-    getImages(publicPermissions, userId)
-      .then((fetchedImagesData) => {
-        setImages(cleanImageData(fetchedImagesData));
-        setLoading(false);
-      })
-      .catch((error) => console.log(error));
+
+    if (publicPermissions) {
+      getAllImages()
+        .then((fetchedImagesData) => {
+          setImages(cleanImageData(fetchedImagesData));
+          setLoading(false);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      getPersonalImages(user.id, user.auth_token)
+        .then((fetchedImagesData) => {
+          setImages(cleanImageData(fetchedImagesData));
+          setLoading(false);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const cleanImageData = (rawData) => {

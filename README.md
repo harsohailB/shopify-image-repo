@@ -115,6 +115,54 @@ Queries all public images
 </details>
 
 <details>
+<summary>GET /images/:user_id</summary>
+
+Queries images for a certain user's account (private + public)
+
+**Query Parameters:**
+
+`auth_token`: string
+
+**Response:**
+
+```
+{
+	"data": [
+		{
+			"id": "5",
+			"type": "image",
+			"attributes": {
+				"name": "Aerodynamic Wooden Shoes",
+				"description": "Explicabo odit...",
+				"image_url": "https://loremflickr.com/300/300",
+				"public": true
+			},
+			"relationships": {
+				"user": {
+					"data": {
+						"id": "3",
+						"type": "user"
+					}
+				}
+			}
+		}
+	],
+	"included": [
+		{
+			"id": "3",
+			"type": "user",
+			"attributes": {
+				"username": "jerry.dare",
+				"email": "zelma_upton@simonis.io",
+			}
+		}
+	]
+}
+```
+
+</details>
+
+<details>
 <summary>POST /images</summary>
 
 Creates a new image
